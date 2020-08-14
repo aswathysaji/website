@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Robocek - GCEK</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.4.0/lib/darkmode-js.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/font.css">
+	<link rel="stylesheet" type="text/css" href="css/navbar.css">
+	<link rel="stylesheet" type="text/css" href="css/info-box.css">
+	<link rel="stylesheet" type="text/css" href="css/sections.css">
+	<link rel="stylesheet" type="text/css" href="css/separators.css">
+	<link rel="stylesheet" type="text/css" href="css/ribbon.css">
+	<link rel="stylesheet" type="text/css" href="css/flipCards.css">
+	<link rel="stylesheet" type="text/css" href="css/announcement-box.css">
+
+	<link rel="stylesheet" href="js/carousel/jquery.flipster.min.css">
+	<script src="js/carousel/jquery.flipster.min.js"></script>
+
+	<style>
+		body {
+			background: #e6f2ff;
+			font-family: Akkurat-Light;
+		}
+
+		h2 {
+			font-size: 2.3rem;
+			font-weight: normal;
+			color: #444;
+			text-align: center;
+		}
+
+		.flipster p:not(.more-info) {
+			font-size: 28px;
+			font-weight: bold;
+			margin: 1rem 0;
+		}
+
+		.content-left::before {
+			position: absolute;
+			content: '';
+			-webkit-transition: width 2s ease-in-out;
+			-moz-transition: width 2s ease-in-out;
+			-o-transition: width 2s ease-in-out;
+			transition: width 2s ease-in-out;
+			top: -20px;
+			width: 0;
+			height: 2px;
+			background-color: #000;
+		}
+
+		.flipster {
+			z-index: 4;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.hide {
+			visibility: hidden;
+		}
+
+		.no-padding {
+			padding: 0;
+		}
+
+		.back-button {
+			position: absolute;
+			z-index: 5;
+			top: 25px;
+			left: 25px;
+		}
+
+		.about-information {
+			text-align: center;
+			margin-bottom: 150px;
+		}
+
+		.scroll-down-prompt {
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			-ms-transform: translate(-50%, -150%);
+			-o-transform: translate(-50%, -150%);
+			-webkit-transform: translate(-50%, -150%);
+			transform: translate(-50%, -150%);
+			text-align: center;
+			cursor: s-resize;
+		}
+
+		.contact-icon {
+			position: absolute;
+			-ms-transform: translate(-50%, -30%);
+			-o-transform: translate(-50%, -30%);
+			-webkit-transform: translate(-50%, -30%);
+			transform: translate(-50%, -30%);
+			z-index: -1;
+			height: 225px;
+		}
+
+		.flipster__container {
+			word-spacing: 0;
+		}
+
+		.word-wrapper,
+		.more-info {
+			white-space: normal;
+		}
+
+		.about-information-content {
+			width: 70%;
+			min-width: 10rem;
+			margin: 0 auto;
+			max-width: 70rem;
+		}
+
+		.alumni-button-container {
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		.alumni-button-container>div {
+			width: 200px;
+		}
+
+		.footer-wrapper {
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-flow: row wrap;
+			flex-flow: row wrap;
+		}
+
+		.footer-info {
+			padding: 10px;
+			-webkit-flex: 1;
+			flex: 1;
+		}
+
+		.footer-socials {
+			padding: 10px;
+			width: 30%;
+		}
+
+		.footer-socials a {
+			text-decoration: none;
+		}
+
+		@media(max-width: 650px) {
+			.footer-info {
+				-webkit-flex: 1 1 auto;
+				flex: 1 1 auto;
+			}
+
+			.footer-socials {
+				width: 100%;
+			}
+		}
+
+
+		@media(max-width: 768px) {
+			.flipster__button {
+				margin: 0;
+			}
+		}
+
+		.logo {
+			height: 80px;
+		}
+
+		#home,
+		#about,
+		#portfolio,
+		#team {
+			position: relative;
+		}
+
+		#home::after {
+			content: '';
+			background: url('media/home_background.svg') no-repeat center;
+			opacity: .4;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: -1;
+		}
+
+		#about::before {
+			content: '';
+			background: url('media/about_background.svg') no-repeat top;
+			opacity: .2;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: 0;
+		}
+
+		#about::after {
+			content: '';
+			background: url('media/about_background2.svg') no-repeat bottom right;
+			opacity: .2;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: 6;
+		}
+
+		#portfolio::after {
+			content: '';
+			background: url('media/portfolio_background.svg') no-repeat center;
+			opacity: .2;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: 0;
+		}
+
+		#team::after {
+			content: '';
+			background: url('media/team_background.svg') repeat center;
+			opacity: .2;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: 0;
+		}
+
+		.welcome-img {
+			position: absolute;
+			max-height: 100%;
+			max-width: 100%;
+			top: 50%;
+			width: 100%;
+			margin: 0 auto;
+			transform: translateY(-50%);
+		}
+
+		.facebook-logo path,
+		.instagram-logo path {
+			-webkit-transition: linear .2s;
+			-moz-transition: linear .2s;
+			-o-transition: linear .2s;
+			transition: linear .2s;
+		}
+
+		.facebook-logo:hover path {
+			fill: #6883d4 !important;
+		}
+
+		.instagram-logo:hover path {
+			fill: url('#instagram-gradient') !important;
+		}
+
+		.footer {
+			text-align: center;
+		}
+
+		.darkmode-toggle {
+			z-index: 100;
+		}
+
+		.darkmode-layer {
+			z-index: 5;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var navBarHeight = $('.navbar').outerHeight(); /* Defined in navbar.css */
+
+		function animate() {
+			$('.content-left').fadeIn(1500, function() {
+				$('.scroll-down-prompt').fadeIn(750).removeClass('hidden');
+			}).removeClass('hidden');
+			$('.content-left').append('<style>.content-left::before { width: 30%; }</style>');
+			$('.content-right').fadeIn(1500).removeClass('hidden');
+		}
+
+		var startPos = {};
+		var endPos = {};
+
+		function svgDrawAnimation(name) {
+			var path = document.querySelector(name);
+			var pathLength = path.getTotalLength();
+			path.style.strokeDasharray = pathLength + ' ' + pathLength;
+			path.style.strokeDashoffset = pathLength;
+			path.getBoundingClientRect();
+
+			updateStartEndPos(name);
+
+			var drawTimer = null;
+			$(window).scroll(function() {
+				if (drawTimer) {
+					return;
+				}
+				drawTimer = setTimeout(function() {
+					drawScroller(name);
+				}, 25);
+			});
+
+			function drawScroller(name) {
+				var drawLength;
+				var scrollPos = $(window).scrollTop();
+
+				if (scrollPos < startPos[name]) {
+					path.style.strokeOpacity = 0;
+					drawLength = 0;
+				} else if (scrollPos < endPos[name]) {
+					path.style.strokeOpacity = 1;
+					drawLength = pathLength * (((scrollPos - startPos[name]) / (endPos[name] - startPos[name])));
+				} else {
+					path.style.strokeOpacity = 1;
+					drawLength = pathLength;
+				}
+
+				path.style.strokeDashoffset = pathLength - drawLength;
+
+				drawTimer = null;
+			}
+
+			drawScroller(name);
+		}
+
+		function updateStartEndPos(name) {
+			startPos[name] = $(name).offset().top - ($(name).outerHeight() / 2) - ($(window).height() * (4.0 / 5.0));
+			endPos[name] = $(name).offset().top - $(name).outerHeight() - ($(window).height() / 2.5);
+		}
+
+		$(document).ready(function() {
+			var options = {
+				bottom: '32px', // default: '32px'
+				right: '32px', // default: '32px'
+				left: 'unset', // default: 'unset'
+				time: '0.3s', // default: '0.3s'
+				mixColor: '#e6f2ff', // default: '#fff'
+				backgroundColor: '#e6f2ff', // default: '#fff'
+				buttonColorDark: '#7a67bf', // default: '#100f2c'
+				buttonColorLight: '#aea3d6', // default: '#fff'
+				saveInCookies: true, // default: true,
+				label: '🌓', // default: ''
+				autoMatchOsTheme: true // default: true
+			}
+
+			const darkmode = new Darkmode(options);
+
+			$('.navbar-toggler').on('click', function() {
+				$('.navbar-toggler-icon-custom').toggleClass('open');
+			});
+
+			$('.scroll-down-prompt').click(function() {
+				$('html, body').stop().animate({
+					scrollTop: $('#about').offset().top - navBarHeight
+				}, 500);
+
+				return false;
+			});
+
+			portfolioSections = ['event', 'show', 'talk', 'workshop', 'outreach'];
+
+			$('.flipster.master-flipster').flipster({
+				spacing: .1,
+				buttons: true,
+				loop: true,
+				style: 'carousel',
+				scrollwheel: false,
+				onItemSwitch: function(currentItem, previousItem) {
+					$(previousItem).find('.btn').fadeOut(300, function() {
+						$(this).css({
+							"display": "inline-block",
+						});
+					}).addClass('hide');
+					$(currentItem).find('.btn').fadeIn(300).removeClass('hide');
+				}
+			});
+
+			flipsterIsReady = false;
+
+			$('.flipster.master-flipster .btn').bind('click touchend', function() {
+				section = portfolioSections[$('.flipster.master-flipster .btn').index(this)];
+				$('.back-button').fadeIn(400).removeClass('hidden');
+				$('.flipster.master-flipster').fadeOut(300, function() {
+					$('.flipster.' + section + '-flipster:not(.flipster--active)').flipster({
+						fade: 0,
+						spacing: .2,
+						buttons: true,
+						start: 0,
+						style: 'carousel',
+						loop: true,
+						scrollwheel: false,
+						onItemSwitch: function(currentItem, previousItem) {
+							$(previousItem).find('.more-info').fadeOut(300, function() {
+								$(this).css({
+									"display": "block",
+									"whitespace": "normal"
+								});
+							}).addClass('hide');
+							$(currentItem).find('.more-info').fadeIn(300).removeClass('hide');
+						}
+					});
+					$('.flipster.' + section + '-flipster').fadeIn(300, function() {
+						flipsterIsReady = true;
+					}).removeClass('hidden');
+				}).addClass('hidden');
+				// if(section !== "outreach") { RIBBON COMMENT
+				// 	$('.ribbon-box .ribbon span').html(section + 's');
+				// }
+				// else {
+				// 	$('.ribbon-box .ribbon span').html(section);
+				// }
+			});
+
+			$('.back-button').click(function() {
+				if (flipsterIsReady) {
+					$(this).fadeOut(400, function() {
+						$(this).addClass('hidden');
+					});
+
+					flipsterIsReady = false;
+
+					$('.flipster:not(.master-flipster):not(.hidden)').fadeOut(300, function() {
+						$('.flipster.master-flipster').fadeIn(300).removeClass('hidden');
+					}).addClass('hidden');
+
+					// $('.ribbon-box .ribbon span').html("Portfolio"); RIBBON COMMENT
+				}
+			});
+
+			var menuItems = $('.navbar .navbar-nav').find("a"),
+				scrollItems = menuItems.map(function() {
+					var temp = $(this).attr("href");
+					var ID = temp.split('#').pop();
+					if (!ID) {
+						var item = $('body');
+					} else {
+						var item = $('#' + ID);
+					}
+
+					if (item.length) {
+						return item;
+					}
+				});
+
+			var lastId;
+
+			menuItems.click(function(e) {
+				var href = $(this).attr("href"),
+					offsetTop = href === "#" ? 0 : $(href).offset().top - navBarHeight + 1;
+				$('html, body').stop().animate({
+					scrollTop: offsetTop
+				}, 500);
+				e.preventDefault();
+			});
+
+			$('.flipCard-container').on('touchend', function() {
+				$(this).trigger('hover');
+			});
+
+			var scrollTimer = null;
+			$(window).scroll(function() {
+				if (scrollTimer) {
+					return;
+				}
+				scrollTimer = setTimeout(handleScroll, 70);
+			}).scroll();
+
+			function handleScroll() {
+				var scrollOffset = $(window).scrollTop();
+
+				var v = $(".content-left").offset().top;
+				if (v != 0 && scrollOffset > v - 120) {
+					if (darkmode.isActivated()) {
+						$(".navbar").css('background-color', 'rgba(245, 222, 179, 0.95)');
+						if (window.matchMedia('(max-width: 768px)').matches) {
+							$("#collapsibleNavbar").css('background-color', 'rgba(245, 222, 179, 0.95)');
+						} else {
+							$("#collapsibleNavbar").css('background-color', 'rgba(245, 222, 179, 0)');
+						}
+					} else {
+						$(".navbar").css('background-color', 'rgba(255, 255, 255, 0.95)');
+						if (window.matchMedia('(max-width: 768px)').matches) {
+							$("#collapsibleNavbar").css('background-color', 'rgba(255, 255, 255, 0.95)');
+						} else {
+							$("#collapsibleNavbar").css('background-color', 'rgba(255, 255, 255, 0)');
+						}
+					}
+					navBarHeight = 60;
+				} else {
+					if (darkmode.isActivated()) {
+						$(".navbar").css('background-color', 'rgba(245, 222, 179, 1)');
+						if (window.matchMedia('(max-width: 768px)').matches) {
+							$("#collapsibleNavbar").css('background-color', 'rgba(245, 222, 179, 1)');
+						} else {
+							$("#collapsibleNavbar").css('background-color', 'rgba(245, 222, 179, 0)');
+						}
+					} else {
+						$(".navbar").css('background-color', 'rgba(255, 255, 255, 0)');
+						$("#collapsibleNavbar").css('background-color', 'rgba(255, 255, 255, 0)');
+					}
+					navBarHeight = 75;
+				}
+				$(".navbar").css('height', navBarHeight + 'px');
+
+				v = $(".scroll-down-prompt");
+				if (scrollOffset > (v.offset().top - $(window).height() / 2.0)) {
+					v.fadeOut("2500");
+				}
+
+				var cur = scrollItems.map(function() {
+					if (($(this).offset().top - navBarHeight) < (scrollOffset + 16 + ($(window).height() / 2.0)))
+						return this;
+				});
+
+				cur = cur[cur.length - 1];
+				var id = cur && cur.length ? cur[0].id : "";
+
+				if (lastId !== id) {
+					lastId = id;
+
+					menuItems
+						.parent().removeClass("active")
+						.end().filter("[href='#" + id + "']").parent().addClass("active");
+				}
+
+				scrollTimer = null;
+			}
+
+			var drawSvgs = ["#mission-svg path", "#vision-svg path", "#values-svg path"];
+			drawSvgs.forEach(svgDrawAnimation);
+
+			$(window).resize(function() {
+				drawSvgs.forEach(updateStartEndPos);
+
+			})
+
+			darkmode.showWidget();
+
+			$('.darkmode-toggle').on('click', function() {
+				handleScroll();
+			});
+		});
+	</script>
+
+</head>
+
+<body onload="animate()">
+	<div class="announcements-box">
+		<img class="announcements-icon" src="./media/announcements_icon.svg" alt="Announcements">
+		<div class="announcements-box-contents">
+			<div class="announcements-box-title">
+				ANNOUNCEMENTS
+			</div>
+			<div class="announcements-box-body">
+				<div class="announcements-item">
+					<div class="announcements-item-title">
+						Loading...
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top row">
+			<div class="container">
+				<div class="navbar-brand">
+					<img class="img-fluid" src="./media/robocek_logo_black.svg" alt="ROBOCEK Logo">
+				</div>
+				<div class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<div class="navbar-toggler-icon-custom">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+					<ul class="navbar-nav mr-auto"></ul>
+					<ul class="navbar-nav">
+						<li class="nav-item active">
+							<a class="nav-link" href="#home">Home</a>
+							<div class="underline"></div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#about">About</a>
+							<div class="underline"></div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#portfolio">Portfolio</a>
+							<div class="underline"></div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#team">Team</a>
+							<div class="underline"></div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#contact">Contact</a>
+							<div class="underline"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<section id="home" class="row">
+			<div class="col">
+				<div class="content-left hidden">
+					An Active Community of<br>
+					Enthusiastic Students from<br>
+					Government College of Engineering, Kannur<br>
+				</div>
+
+				<div class="content-right hidden">
+					<img class="img_fluid welcome-img" src="./media/robot_welcome.svg" alt="Robot welcome image">
+				</div>
+
+				<div class="scroll-down-prompt hidden">
+					&#x2b9f;
+				</div>
+			</div>
+		</section>
+
+		<div class="separator">
+			<hr>
+			<span class="gear-icon"></span>
+			<hr>
+		</div>
+
+		<section id="about" class="row">
+			<div class="col">
+				<h2>About</h2>
+				<span class="small-rounded-separator"></span>
+
+				<div class="about-information pt-2">
+					<div class="about-information-content">
+						ROBOCEK is a teaching and learning community established in the Government College of Engineering, Kannur.
+						Originally founded in 2013 by a team of enthusiasts, inspired from a group of students from Chennai, it attained its official recognition on 30th January, 2014.<br><br>
+						ROBOCEK is a dedicated cluster of energetic enthusiasts and hobbyists, that strives to impart passion for innovation and inclusion.
+						We are committed to academic excellence, student success and community engagement.
+						We organise sessions, workshops, competitions and expeditions nurturing innovation and learning, endeavouring to keep in pace with the ever evolving field of electronics and robotics.
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<div class="row d-flex justify-content-around">
+						<div class="col-md-4">
+							<div class="info-wrapper">
+								<div class="info-head">
+									<svg id="mission-svg" class="info-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+										<path style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+										 d="M89.1 29.2c3.3 6.4 5.3 13.9 5.3 20.8 0 24.4-20 44.4-44.4 44.4S5.6 74.4 5.6 50 25.6 5.6 50 5.6c7.5 0 14.7 1.9 21.4 5.5m-2.8 31.1c.8 2.5 1.7 5.3 1.7 7.8 0 11.1-9.2 20.3-20.3 20.3S29.7 61.1 29.7 50 38.9 29.7 50 29.7c2.8 0 5.5.6 8 1.7M51.9 50L92.2 6.1m-5.8 5.6l-2-9.7m-5.3 5.8l1.9 9.7m10.6 2.8l-9.7-1.9m14.9-4.1l-9.7-1.9" />
+									</svg>
+									<h2 class="info-title">Mission</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text">
+										ROBOCEK aspires to foster young minds to new ingisights of the world of robotics.
+										The club creates a climate full of energy for the creative involvement of begineers and enthusiasts among
+										the student community. The club facilitates a diverse learning environment aiding in design, building,
+										operation and control of robotic systems through hands-on projects and throught collaboration with
+										experienced advisors and mentors
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="info-wrapper">
+								<div class="info-head">
+									<svg id="vision-svg" class="info-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+										<path style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+										 d="M50.2 33.3c9.3 0 16.8 7.5 16.8 16.8s-7.5 16.8-16.8 16.8-16.8-7.5-16.8-16.8 7.5-16.8 16.8-16.8zm0 8.4c4.6 0 8.4 3.8 8.4 8.4s-4 8.4-8.4 8.4-8.4-3.8-8.4-8.4M2 50.1s21.5 27.2 48 27.2 48-27.2 48-27.2-21.2-27.4-47.8-27.4S2 50.1 2 50.1z" />
+									</svg>
+									<h2 class="info-title">Vision</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text">
+										ROBOCEK endeavours to create a community of strong responsible engineers who can intellectually face the
+										needs and challenges of tomorrow and also respect universal values
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="info-wrapper">
+								<div class="info-head">
+									<svg id="values-svg" class="info-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+										<path style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+										 d="M72.5 29.4l-31.2 29L30.9 48M10.4 2.5h78.9v30.1c0 27.3-15.1 52.4-39.5 65.3-24.3-12.9-39.4-38-39.4-65.3V2.5z" />
+									</svg>
+									<h2 class="info-title">Values</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text">
+										ROBOCEK strives to excel as a learning community by adapting, learning and continually improving our team.
+										This is done by encouraging initiative and involvement thereby fostering healthy ethical and social
+										relations while at the same time, adhering to sustainable ideas
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="separator">
+			<hr>
+			<span class="gear-icon"></span>
+			<hr>
+		</div>
+
+		<section id="portfolio" class="row no-padding pt-2">
+			<div class="col">
+				<h2>Portfolio</h2>
+				<span class="small-rounded-separator"></span>
+				<div class="row">
+					<!-- <div class="col ribbon-box"> RIBBON COMMENT -->
+					<div class="col">
+						<!-- <div class="ribbon ribbon-top-left"><span>Portfolio</span></div> RIBBON COMMENT -->
+						<div class="btn btn-warning back-button hidden">&#x2190; Back</div>
+						<div class="flipster master-flipster content-center">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Events">
+										<p class="word-wrapper">Events</p>
+										<div class="btn btn-primary hide">View</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Shows">
+										<p class="word-wrapper">Shows</p>
+										<div class="btn btn-primary hide">View</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Talks">
+										<p class="word-wrapper">Talks</p>
+										<div class="btn btn-primary">View</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Workshops">
+										<p class="word-wrapper">Workshops</p>
+										<div class="btn btn-primary hide">View</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Outreach programmes">
+										<p class="word-wrapper">Outreach programmes</p>
+										<div class="btn btn-primary hide">View</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="flipster event-flipster content-center hidden">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Event 1">
+										<p class="word-wrapper">Farewell '19 - Hasta La Vista</p>
+										<p class="more-info">
+											As we learn to evolve as a family bringing new people in to charter new roads,
+											some people do have to say goodbye. On the 3rd of May 2019, we took a few minutes
+											together under one umbrella to share our old stories and reminisce our best
+											moments. A worthy while, as a family for one more last time, to share a few more
+											moments of togetherness
+										</p>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Event 2">
+										<p class="word-wrapper">Xplore '19 - RoboYodha</p>
+										<p class="more-info hide">
+											RoboYodha conducted in association with Xplore '19 offered the perfect platform
+											for all bot makers, an arena for one-on-one robot combat. The ring was laid,
+											the bots were set and a dynamic struggle for complete supremacy was on show
+										</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="flipster show-flipster content-center hidden">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Show 1">
+										<p class="word-wrapper">Xplore'19 - AirShow</p>
+										<p class="more-info">
+											Drone Expo
+										</p>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Show 2">
+										<p class="word-wrapper">Xplore'19 - RoboExpo Yantrarora</p>
+										<p class="more-info hide">
+											Robo Expo
+										</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="flipster talk-flipster content-center hidden">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Talk 1">
+										<p class="word-wrapper">Expert Talks</p>
+										<p class="more-info">
+											Our team hosts tech talks by experts of machine learning and artificial
+											intelligence. Experts come from various places to partake in our events.
+											Talks on booming fields of technology like AI, ML, AR VR, Cyber Secuirity
+											and many more are discussed about
+										</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="flipster workshop-flipster content-center hidden">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Workshop 1">
+										<p class="word-wrapper">Actuator’19 – I, II & III</p>
+										<p class="more-info">
+											Actuator offers our freshers the perfect opportunity to put their debut step
+											in robotics. This beginner’s workshop is conducted annually for all robotics
+											entusiasts. This year, Actuator’19 was conducted during the months of August
+											and September, 2019, as two day workshops for over 180 students in three
+											different sessions
+										</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="flipster outreach-flipster content-center hidden">
+							<ul>
+								<li>
+									<div class="item-content">
+										<img src="./media/robocek_medium.svg" alt="Outreach 1">
+										<p class="word-wrapper">Reaching out to the society</p>
+										<p class="more-info">
+											Our team coordinated various outreach as well as development programs so as
+											to bring engineering into the daily life of our common people. We reached out
+											to help our society in its various needs - to provide a forum to share
+											resources, support the community in technology and to collaborate projects to
+											make a continued impact. We look forward to contribute more to the welfare of
+											our communities
+										</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="separator">
+			<hr>
+			<span class="gear-icon"></span>
+			<hr>
+		</div>
+
+		<section id="team" class="row">
+			<div class="col">
+				<h2>The Team</h2>
+				<span class="small-rounded-separator"></span>
+				<div class="flipCard-wrapper">
+					<div class="flipCard-cols">
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/330/280)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>T D John</p>
+										<span class="mb-3">Faculty in-charge</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/360/260)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Dr. Abdul Nazar</p>
+										<span class="mb-3">Faculty in-charge</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/360/260)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Ranjith Ram</p>
+										<span class="mb-3">Faculty in-charge</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flipCard-wrapper">
+					<div class="flipCard-cols">
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url('./media/executive_committee/sayanth.jpg')">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Sayanth N S</p>
+										<span class="mb-3">President</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url('./media/executive_committee/suhail.jpg')">
+									<div class="inner">
+									</div>
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Mohammed Suhail</p>
+										<span class="mb-3">Secretary</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/352/280)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Varun</p>
+										<span class="mb-3">Project Management Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url('./media/executive_committee/hadi.jpg')">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Hadi Abdulla</p>
+										<span class="mb-3">Publicity Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/340/280)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Mrinal</p>
+										<span class="mb-3">Vice President</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/352/280)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Vismaya Sunil</p>
+										<span class="mb-3">Joint Secretary</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/345/280)">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Divya</p>
+										<span class="mb-3">Asst. Project Management</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url('./media/executive_committee/abhinand.jpg')">
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Abhinand</p>
+										<span class="mb-3">Asst. Publicity Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/345/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Sreerag R K</p>
+										<span class="mb-3">Mechanical Design Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/345/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Sourav Raj</p>
+										<span class="mb-3">Circuit Design Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/345/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Alka</p>
+										<span class="mb-3">Programming Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flipCard-wrapper">
+					<div class="flipCard-cols">
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/352/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Kiran</p>
+										<span class="mb-3">Asst. Mechanical Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/352/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Drishya</p>
+										<span class="mb-3">Asst. Circuit Design Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flipCard-col">
+							<div class="flipCard-container">
+								<div class="front" style="background-image: url(http://placekitten.com/350/280)">
+
+								</div>
+								<div class="back">
+									<div class="inner">
+										<p>Edwin Jose George</p>
+										<span class="mb-3">Asst. Programming Head</span>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="alumni-button-container">
+					<div class="btn btn-primary">View Alumni</div>
+				</div> -->
+			</div>
+		</section>
+
+		<div class="separator">
+			<hr>
+			<span class="gear-icon"></span>
+			<hr>
+		</div>
+
+		<section id="contact" class="row">
+			<div class="col">
+				<h2>Contact</h2>
+				<span class="small-rounded-separator"></span>
+
+				<div class="container-fluid">
+					<div class="row d-flex justify-content-around">
+						<div class="col-md-4">
+							<div class="info-wrapper center-card-vertical">
+								<div class="info-head">
+									<img src="./media/location.svg" class="contact-icon" alt="location">
+									<h2 class="info-title">Address</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text"><a href="https://goo.gl/maps/7LQD1XYR4ar">Government College of Engineering, Kannur</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="info-wrapper center-card-vertical">
+								<div class="info-head">
+									<img src="./media/telephone.svg" class="contact-icon" alt="phone">
+									<h2 class="info-title">Phone</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text"><a href="tel:+919895109080">+91 9895109080</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="info-wrapper center-card-vertical">
+								<div class="info-head">
+									<img src="./media/mail.svg" class="contact-icon" alt="email">
+									<h2 class="info-title">Email</h2>
+								</div>
+								<span class="small-rounded-separator"></span>
+								<div class="info-body">
+									<p class="info-text"><a href="mailto:robocek@gcek.ac.in">robocek@gcek.ac.in</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<hr>
+
+		<div class="footer-wrapper">
+			<div class="footer-info">
+				<div class="footer-title mb-2">
+					<img class="img-fluid logo" src="./media/robocek_logo_black.svg" alt="ROBOCEK Logo">
+				</div>
+				<div class="footer-content">
+					ROBOCEK is a teaching and learning community established in the Government College of Engineering, Kannur
+					with a dedicated cluster of energetic enthusiasts and hobbyists, that strives to impart passion for innovation and inclusion.
+					We are committed to academic excellence, student success and community engagement.
+				</div>
+			</div>
+			<div class="footer-socials">
+				Follow our socials: <br><br>
+				<a href="https://www.facebook.com/robocek/" target="_blank">
+					<svg class="facebook-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20pt" height="20pt" viewBox="0 0 20 20" version="1.1">
+						<g>
+							<path style="stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;"
+							 d="M 12.800781 4.398438 L 14.800781 4.398438 C 15.019531 4.398438 15.199219 4.222656 15.199219 4 L 15.199219 1.304688 C 15.199219 1.09375 15.039062 0.921875 14.828125 0.90625 C 14.195312 0.859375 12.949219 0.800781 12.054688 0.800781 C 9.601562 0.800781 8 2.273438 8 4.945312 L 8 7.601562 L 5.199219 7.601562 C 4.980469 7.601562 4.800781 7.777344 4.800781 8 L 4.800781 10.800781 C 4.800781 11.019531 4.980469 11.199219 5.199219 11.199219 L 8 11.199219 L 8 18.800781 C 8 19.019531 8.179688 19.199219 8.398438 19.199219 L 11.199219 19.199219 C 11.421875 19.199219 11.601562 19.019531 11.601562 18.800781 L 11.601562 11.199219 L 14.488281 11.199219 C 14.691406 11.199219 14.863281 11.046875 14.886719 10.84375 L 15.199219 8.042969 C 15.222656 7.808594 15.039062 7.601562 14.800781 7.601562 L 11.601562 7.601562 L 11.601562 5.601562 C 11.601562 4.9375 12.136719 4.398438 12.800781 4.398438 Z M 12.800781 4.398438 " />
+						</g>
+					</svg>
+				</a>
+				&nbsp;
+				<a href="https://www.instagram.com/robocekian/" target="_blank">
+					<svg class="instagram-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20pt" height="20pt" viewBox="0 0 20 20" version="1.1">
+						<g>
+							<path style="stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;"
+							 d="M 6.398438 1.199219 C 3.53125 1.199219 1.199219 3.53125 1.199219 6.398438 L 1.199219 13.601562 C 1.199219 16.46875 3.53125 18.800781 6.398438 18.800781 L 13.601562 18.800781 C 16.46875 18.800781 18.800781 16.46875 18.800781 13.601562 L 18.800781 6.398438 C 18.800781 3.53125 16.46875 1.199219 13.601562 1.199219 Z M 6.398438 2 L 13.601562 2 C 16.035156 2 18 3.964844 18 6.398438 L 18 13.601562 C 18 16.035156 16.035156 18 13.601562 18 L 6.398438 18 C 3.964844 18 2 16.035156 2 13.601562 L 2 6.398438 C 2 3.964844 3.964844 2 6.398438 2 Z M 14.800781 4.398438 C 14.359375 4.398438 14 4.757812 14 5.199219 C 14 5.640625 14.359375 6 14.800781 6 C 15.242188 6 15.601562 5.640625 15.601562 5.199219 C 15.601562 4.757812 15.242188 4.398438 14.800781 4.398438 Z M 10 5.601562 C 7.574219 5.601562 5.601562 7.574219 5.601562 10 C 5.601562 12.425781 7.574219 14.398438 10 14.398438 C 12.425781 14.398438 14.398438 12.425781 14.398438 10 C 14.398438 7.574219 12.425781 5.601562 10 5.601562 Z M 10 6.398438 C 11.992188 6.398438 13.601562 8.007812 13.601562 10 C 13.601562 11.992188 11.992188 13.601562 10 13.601562 C 8.007812 13.601562 6.398438 11.992188 6.398438 10 C 6.398438 8.007812 8.007812 6.398438 10 6.398438 Z M 10 6.398438 " />
+						</g>
+					</svg>
+				</a>
+				<svg height="0" width="0">
+					<radialGradient id="instagram-gradient" r="150%" cx="30%" cy="107%">
+						<stop stop-color="#fdf497" offset="0" />
+						<stop stop-color="#fdf497" offset="0.05" />
+						<stop stop-color="#fd5949" offset="0.45" />
+						<stop stop-color="#d6249f" offset="0.6" />
+						<stop stop-color="#285AEB" offset="0.9" />
+					</radialGradient>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="footer mb-3">
+		Designed and Developed with <span style="color:red;">&hearts;</span> by
+		<a href="mailto:cg.devworks@gmail.com">Mohamed Jaseel</a> and
+		<a href="mailto:mohammedsuhailcp@gmail.com">Mohammed Suhail</a>
+	</div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyAIckYlOaPdI4nWRSZRZXrE9FWJawvTUEs",
+		authDomain: "robocek-website.firebaseapp.com",
+		databaseURL: "https://robocek-website.firebaseio.com",
+		projectId: "robocek-website",
+		storageBucket: "robocek-website.appspot.com",
+		messagingSenderId: "986428411095",
+		appId: "1:986428411095:web:0f06ef4954528b2d15f492"
+	};
+
+	firebase.initializeApp(firebaseConfig);
+	var database = firebase.database();
+	loadAnnouncements(database);
+
+	function loadAnnouncements(database) {
+
+		firebase.database().ref('/announcements/').orderByKey().once('value').then(function(snapshot) {
+			$('body > div.announcements-box > div > div.announcements-box-body').empty();
+
+			for (announcement in snapshot.val()) {
+				title = snapshot.child(announcement + '/title').val();
+				preview = snapshot.child(announcement + '/preview').val();
+				body = snapshot.child(announcement + '/body').val();
+
+				if (preview == null) {
+					preview = '';
+				}
+
+				$('body > div.announcements-box > div > div.announcements-box-body').append(
+					'<div class="announcements-item">' +
+					'<div class="announcements-item-title">' + preview + '&nbsp' + title + '</div>' +
+					'<div class="announcements-item-body">' + body + '</div>' +
+					'</div>' +
+					'<hr class="announcement-item-separator">'
+				);
+			}
+		});
+	}
+</script>
+
+</html>

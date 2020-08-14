@@ -1,0 +1,27 @@
+.info-wrapper {
+	position: absolute;
+	text-align: center;
+	left: 0;
+	right: 0;
+}
+
+.info-wrapper.center-card-vertical {
+	top: 50%;
+	-webkit-transform: translateY(-70%);
+	-moz-transform: translateY(-70%);
+	-o-transform: translateY(-70%);
+	transform: translateY(-70%);
+}
+
+.info-img {
+	width: 100px;
+}
+
+.info-title {
+	margin: 0;
+	text-align: center;
+}
+
+.info-body {
+	padding: 0 20px 0 20px;
+}
